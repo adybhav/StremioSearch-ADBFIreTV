@@ -1,0 +1,4 @@
+# .gitignore
+.DS_STORE
+.idea/
+.env2
