@@ -82,21 +82,9 @@ def main():
     print("Complete")
 
 def get_voice_input(prompt="🎤 Say the title now..."):
-    recognizer = sr.Recognizer()
-    mic = sr.Microphone()
-
     print(prompt)
-    with mic as source:
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source, timeout=7, phrase_time_limit=5)
-    try:
-        text = recognizer.recognize_google(audio)
-        print(f"✅ You said: {text}")
-        return text
-    except sr.UnknownValueError:
-        return None
-    except sr.RequestError:
-        return None
+    result = subprocess.check_output(["termux-speech-to-text"])
+    return result.decode().strip()
 
 if __name__ == "__main__":
     main()
